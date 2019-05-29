@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>userList</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    
+</head>
+<body class="container">
+<br/>
+<h1>Projects</h1>
+<br/><br/>
+<div class="with:80%" >
+    <table class="table table-hover" >
+        <thead>
+     
+        </thead>
+        <tbody>
+        <tr  th:each="project : ${projects}">
+           
+            <td >
+            <label style="font-weight:normal;font-size:22px;"  th:text="*{project.title}"></label>
+            
+             <label style="color:#716767;text-style:italic;font-weight:normal;" th:text="*{project.description}"></label>
+            </td>
+          
+       
+            <td><a th:href="@{/project/toEdit(id=${project.id})}"><i class='fas fa-edit'></i></a></td>
+            <td><a th:href="@{/project/delete(id=${project.id})}"><i class='fas fa-trash'></i></a></td>
+             <td><a th:href="@{/project/toAddTask/{id}(id=${project.id})}"><i class="fas fa-tasks"></i></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br/>
+<div class="form-group">
+    <div class="col-sm-2 control-label">
+        <a href="/project/toAdd" th:href="@{/project/toAdd}" class="btn btn-info">CREATE NEW PROJECT</a>
+    </div>
+</div>
+
+</body>
+</html>

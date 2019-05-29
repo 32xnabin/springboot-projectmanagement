@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>user</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+</head>
+<body class="container">
+<br/>
+<h1><label th:text="*{task.title}"/></label></h1>
+<br/><br/>
+
+<div class="with:80%">
+ <form class="form-horizontal"   th:action="@{/project/taskEdit}"  method="post">
+		    <input type="hidden" name="task" th:value="*{task.id}" />
+		 <div class="form-group">Progress : <input type="range" min="5" th:value="*{task.progress}" name="progress" id="progress" max="100" step="1" >
+		 <input type="submit" name="Submit"></div>
+</form>
+<table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Description</th>
+            
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  th:each="timeLog : ${task.timeLogs}">
+            <th scope="row" th:text="${timeLog.id}">1</th>
+            <td th:text="${timeLog.content}">neo</td>
+            <td th:text="${timeLog.startTime}">neo</td>
+            <td th:text="${timeLog.endTime}">neo</td>
+            
+       
+            <td><a th:href="@{/task/toEdit(id=${timeLog.id})}">edit</a></td>
+            <td><a th:href="@{/task/delete(id=${timeLog.id})}">delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <form class="form-horizontal"   th:action="@{/project/addTimeLog}"  method="post">
+    <input type="hidden" name="task" th:value="*{task.id}" />
+       
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Start Time</label>
+            <div class="col-sm-3">
+              
+                <input class="form-control" type="time" name="startTime"  id="startTime" placeholder="Start Time"/>
+            </div>
+            <label for="title" class="col-sm-2 control-label">End Time</label>
+            <div class="col-sm-3">
+                <input type="time" class="form-control" name="endTime"  id="endTime" placeholder="End Time"/>
+            </div>
+        </div>
+       
+         <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="content"  id="content" placeholder="Content"/>
+            </div>
+        </div>
+        
+        
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="Submit" class="btn btn-info" />
+                &nbsp; &nbsp; &nbsp;
+                <input type="reset" value="Reset" class="btn btn-info" />
+            </div>
+
+        </div>
+    </form>
+		<table class="table table-hover">
+		        <thead>
+		        <tr>
+		            <th>#</th>
+		            <th>Title</th>
+		            <th>Description</th>
+		            
+		            <th>Edit</th>
+		            <th>Delete</th>
+		        </tr>
+		        </thead>
+		        <tbody>
+		        <tr  th:each="comment : ${task.comments}">
+		            <th scope="row" th:text="${comment.id}">1</th>
+		            <td th:text="${comment.content}">neo</td>
+		            
+		       
+		            <td><a th:href="@{/task/toEdit(id=${comment.id})}">edit</a></td>
+		            <td><a th:href="@{/task/delete(id=${comment.id})}">delete</a></td>
+		        </tr>
+		        </tbody>
+		    </table>
+		    <form class="form-horizontal"   th:action="@{/project/addComment}"  method="post">
+		    <input type="hidden" name="task" th:value="*{task.id}" />
+		        <div class="form-group">
+		            <label for="title" class="col-sm-2 control-label">Title</label>
+		            <div class="col-sm-10">
+		                <input type="text" class="form-control" name="content"  id="content" placeholder="Content"/>
+		            </div>
+		        </div>
+		        
+		        
+		        <div class="form-group">
+		            <div class="col-sm-offset-2 col-sm-10">
+		                <input type="submit" value="Submit" class="btn btn-info" />
+		                &nbsp; &nbsp; &nbsp;
+		                <input type="reset" value="Reset" class="btn btn-info" />
+		            </div>
+		
+		        </div>
+		    </form>
+</div>
+</body>
+</html>
